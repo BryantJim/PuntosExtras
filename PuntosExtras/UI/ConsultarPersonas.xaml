@@ -1,0 +1,41 @@
+﻿<Window x:Class="PuntosExtras.UI.ConsultarPersonas"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PuntosExtras.UI"
+        mc:Ignorable="d"
+        Title="ConsultarPersonas" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="49*"/>
+            <RowDefinition Height="57*"/>
+            <RowDefinition Height="329*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="91*"/>
+            <ColumnDefinition Width="167*"/>
+            <ColumnDefinition Width="142*"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Filtro" HorizontalAlignment="Center" VerticalAlignment="Center" Height="26" Width="38"/>
+        <Label Content="Criterio" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="26" Width="48"/>
+        <ComboBox x:Name="FiltroComboBox" HorizontalAlignment="Left" Margin="35,13,0,0" Grid.Row="1" VerticalAlignment="Top" Width="120">
+            <ComboBoxItem Content="Todo"/>
+            <ComboBoxItem Content="ID"/>
+            <ComboBoxItem Content="Nombres"/>
+        </ComboBox>
+        <TextBox x:Name="CriterioTextBox" Grid.Column="1" HorizontalAlignment="Left" Margin="80,13,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="190"/>
+        <Button x:Name="ConsultarButton" Content="Consultar" Grid.Column="2" HorizontalAlignment="Left" Margin="98,13,0,0" Grid.Row="1" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="95" Height="26" Click="ConsultarButton_Click">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.285"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <DataGrid x:Name="ConsultaDataGrid" Grid.Row="2" Grid.ColumnSpan="3" Margin="0,0,2,0"/>
+
+    </Grid>
+</Window>
