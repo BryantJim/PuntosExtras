@@ -20,9 +20,11 @@ namespace PuntosExtras.UI
     /// </summary>
     public partial class RegistrarPersonas : Window
     {
+        Personas personas = new Personas();
         public RegistrarPersonas()
         {
             InitializeComponent();
+            this.DataContext = personas;
             PersonaIdTextBox.Text = "0";
         }
 
@@ -37,61 +39,20 @@ namespace PuntosExtras.UI
             Limpiar();
         }
 
-        private Personas LlenarClase()
-        {
-            Personas persona = new Personas();
-            persona.PersonasId = Convert.ToInt32(PersonaIdTextBox.Text);
-            persona.Nombres = NombreTextBox.Text;
-
-            return persona;
-        }
-
-        private void LlenarCampo(Personas persona)
-        {
-            PersonaIdTextBox.Text = Convert.ToString(persona.PersonasId);
-            NombreTextBox.Text = persona.Nombres;
-        }
-
-        private bool Validar()
-        {
-            bool paso = true;
-
-            if (string.IsNullOrWhiteSpace(PersonaIdTextBox.Text))
-            {
-                MessageBox.Show("No puede dejar el campo de persona ID vacio");
-                PersonaIdTextBox.Focus();
-                paso = false;
-            }
-
-            if (string.IsNullOrWhiteSpace(NombreTextBox.Text))
-            {
-                MessageBox.Show("No puede dejar el campo de Nombres Vacio");
-                NombreTextBox.Focus();
-                paso = false;
-            }
-            return paso;
-        }
-
         private bool ExisteEnLaBaseDeDatos()
         {
-           Personas persona = PersonasBLL.Buscar(Convert.ToInt32(PersonaIdTextBox.Text));
+           Personas persona = PersonasBLL.Buscar(personas.PersonasId);
 
             return (persona != null);
         }
 
         private void GuardarButton_Click(object sender, RoutedEventArgs e)
         {
-            Personas persona = new Personas();
             bool paso = false;
-
-            if (!Validar())
-                return;
-
-            persona = LlenarClase();
 
             //determinar si es guardar o modificar
             if (PersonaIdTextBox.Text == "0")
-                paso = PersonasBLL.Guardar(persona);
+                paso = PersonasBLL.Guardar(personas);
             else
             {
                 if (!ExisteEnLaBaseDeDatos())
@@ -99,7 +60,7 @@ namespace PuntosExtras.UI
                     MessageBox.Show("No se puede Modificar una persona que no existe");
                     return;
                 }
-                paso = PersonasBLL.Modificar(persona);
+                paso = PersonasBLL.Modificar(personas);
             }
 
             //informar resurtado
@@ -122,10 +83,12 @@ namespace PuntosExtras.UI
 
             persona = PersonasBLL.Buscar(id);
 
-            if (persona != null)
+            if (personas != null)
             {
+                personas = persona;
+                Cargar();
                 MessageBox.Show("Persona Encontrado");
-                LlenarCampo(persona);
+                //LlenarCampo(persona);
             }
             else
                 MessageBox.Show("Persona no Encontrado");
@@ -144,6 +107,12 @@ namespace PuntosExtras.UI
             }
             else
                 MessageBox.Show("No se puede Eliminar un persona que no existe");
+        }
+
+        private void Cargar()
+        {
+            this.DataContext = null;
+            this.DataContext = personas;
         }
     }
     }

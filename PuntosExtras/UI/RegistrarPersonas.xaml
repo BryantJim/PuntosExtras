@@ -19,8 +19,20 @@
         </Grid.RowDefinitions>
         <Label Content="Persona ID" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center"/>
         <Label Content="Nombres" HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Row="1" VerticalAlignment="Center"/>
-        <TextBox x:Name="PersonaIdTextBox" Grid.Column="1" HorizontalAlignment="Left" Margin="39,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="70"/>
-        <TextBox x:Name="NombreTextBox" Grid.ColumnSpan="2" Grid.Column="1" HorizontalAlignment="Left" Margin="39,0,0,0" Grid.RowSpan="2" Grid.Row="1"  TextWrapping="Wrap" VerticalAlignment="Top" Width="160"/>
+        <TextBox x:Name="PersonaIdTextBox" Grid.Column="1" HorizontalAlignment="Left" Margin="39,0,0,0"  VerticalAlignment="Center" Width="70">
+            <TextBox.Text>
+                <Binding  Path="PersonasId" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox x:Name="NombreTextBox" Grid.ColumnSpan="2" Grid.Column="1" HorizontalAlignment="Left" Margin="39,0,0,0" Grid.RowSpan="2" Grid.Row="1"  VerticalAlignment="Top" Width="160">
+            <TextBox.Text>
+                <Binding Path="Nombres" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay"/>
+            </TextBox.Text>
+        </TextBox>
         <Button x:Name="BuscarButton" Content="Buscar" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="48" Click="BuscarButton_Click"/>
         <Button Content="Nuevo" HorizontalAlignment="Left" Margin="36,0,0,0" Grid.Row="2" VerticalAlignment="Center" Width="74" Height="29" Click="Button_Click"/>
         <Button x:Name="GuardarButton" Content="Guardar" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Center" Width="74" Height="29" Click="GuardarButton_Click"/>
