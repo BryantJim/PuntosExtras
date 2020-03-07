@@ -31,5 +31,11 @@ namespace PuntosExtras
             RegistrarPersonas RP = new RegistrarPersonas();
             RP.Show();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ConsultarPersonas CP = new ConsultarPersonas();
+            CP.Show();
+        }
     }
 }
