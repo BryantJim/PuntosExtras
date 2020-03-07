@@ -12,7 +12,7 @@ namespace PuntosExtras.DAL
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite(@"DataBase\Personas.db");
+            optionsBuilder.UseSqlite(@"Data source=DataBase\Personas.db");
         }
     }
 }
